@@ -2,43 +2,55 @@ import React, { Component } from 'react'
 import Car from './Car/Car'
 
 
-export default 
+ 
 
 class App extends Component {
+
+    state = {
+        cars: [
+            {name: 'Ford', year: 2018},
+            {name: 'Audi', year: 2016},
+            {name: 'Mazda', year: 2010}
+        ],
+        pageTitle: 'React Components'
+
+    }
+
+    changeTitleHandler = () => {
+        console.log('Clicked')
+
+    }
+
     render() {
         const divStyle = {
             textAlign: 'center'
         }
+        
+        const cars = this.state.cars;
+
 // используем фигурные скобки, когда передаем какой-то объект. 
 // name и year -  это и есть свойства(props) компонента Car - 
 // передаем свойства как значения атрибутов 
 
        return (
            <div style={divStyle}>
-               <h1>Hello world!</h1>
+               <h1>{this.state.pageTitle}</h1>
+{/* не укзаываем () у функции  changeTitleHandler(), потому что мы добавляем
+указатель на функцию, которая выполнится в том момент, когда будет происходить 
+событие
+если указать скобки, то функция выполнится сразу
+*/}
+               <button onClick={this.changeTitleHandler}>Change title</button>
 
-               <Car name={'Ford'} year={2018}>
-               <p style={{color: 'Blue'}}>COLOR</p>
-               </Car>
-               {/* меняем самозакрывающийся тег на  */}
-               <Car name={'Audi'} year={2016}>
-                   <p style={{color: 'red'}}>COLOR</p>
-               </Car>
-            
-               <Car name={'Mazda'} year={2010} />
-
+               <Car name={cars[0].name} year={cars[0].year} />
+               <Car name={cars[1].name} year={cars[1].year} />
+               <Car name={cars[2].name} year={cars[2].year} />
            </div>
       );
 
-    //     return React.createElement(
-    //         'div',
-    //         {className: 'App'},
-    //         React.createElement(
-    //             'h1',
-    //             null,
-    //             'Hello world!'
-    //         )
-    //     )
-    // }
+
+  
 }
 }
+
+export default App;
