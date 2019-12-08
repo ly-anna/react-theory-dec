@@ -23,6 +23,13 @@ class App extends Component {
 
     }
 
+    handleInput = (event) => {
+        console.log('Changed', event.target.value)
+        this.setState({
+            pageTitle: event.target.value
+        })
+    }
+
     render() {
         console.log('Render')
         const divStyle = {
@@ -38,10 +45,13 @@ class App extends Component {
        return (
            <div style={divStyle}>
                <h1>{this.state.pageTitle}</h1>
+
+               <input type='text' onChange={this.handleInput} />
+
+
 {/* не укзаываем () у функции  changeTitleHandler(), потому что мы добавляем
 указатель на функцию, которая выполнится в том момент, когда будет происходить 
-событие
-если указать скобки, то функция выполнится сразу
+событие если указать скобки, то функция выполнится сразу
 */}
                <button 
                onClick={this.changeTitleHandler.bind(this, 'Changed!')}
