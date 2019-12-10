@@ -13,31 +13,51 @@ class App extends Component {
             {name: 'Audi', year: 2016},
             {name: 'Mazda', year: 2010}
         ],
-        pageTitle: 'React Components'
+        pageTitle: 'React Components',
+        showCars: false
 
     }
 
-    changeTitleHandler = (newTitle) => {
+    toggleCarsHandler = () => {
         this.setState({
-           pageTitle: newTitle
+            showCars: !this.state.showCars
         })
 
     }
+    changeTitleHandler = pageTitle => 
+        this.setState({pageTitle})
+    
+    
 
-    handleInput = (event) => {
-        // Нативный объект event, поле target и поле value
-        // console.log('Changed', event.target.value)
-        this.setState({
-            pageTitle: event.target.value
-        })
-    }
+    
+
+    // handleInput = (event) => {
+    //     // Нативный объект event, поле target и поле value
+    //     // console.log('Changed', event.target.value)
+    //     this.setState({
+    //         pageTitle: event.target.value
+    //     })
+    // }
 
     render() {
         console.log('Render')
         const divStyle = {
             textAlign: 'center'
         }
-        
+        let cars = null
+
+        if (this.state.showCars) {
+            cars = this.state.cars.map((car, index) => {
+                return (
+                    <Car 
+                        key={index}
+                        name={car.name}
+                        year={car.year}
+                        onChangeTitle={() => this.changeTitleHandler(car.name)}
+                    />
+                )
+            })
+        }
         // const cars = this.state.cars;
 
 // используем фигурные скобки, когда передаем какой-то объект. 
@@ -48,7 +68,7 @@ class App extends Component {
            <div style={divStyle}>
                <h1>{this.state.pageTitle}</h1>
 
-               <input type='text' onChange={this.handleInput} />
+               {/* <input type='text' onChange={this.handleInput} /> */}
 
 
 {/* не укзаываем () у функции  changeTitleHandler(), потому что мы добавляем
@@ -56,21 +76,26 @@ class App extends Component {
 событие если указать скобки, то функция выполнится сразу
 */}
                <button 
-               onClick={this.changeTitleHandler.bind(this, 'Changed!')}
-               >Change title</button>
+               onClick={this.toggleCarsHandler}
+               >Toggle cars</button>
 
-               { this.state.cars.map((car, index) => {
-                 return (
-                     <Car 
-                        key={index}
-                        name={car.name}
-                        year={car.year}
-                        onChangeTitle={() => this.changeTitleHandler(car.name)}
-                     />
+{/* вывод списка машин по нажатию кнопки Toggle cars */}
+               {/* {  this.state.showCars 
+                    ? this.state.cars.map((car, index) => {
+                        return (
+                            <Car 
+                                key={index}
+                                name={car.name}
+                                year={car.year}
+                                onChangeTitle={() => this.changeTitleHandler(car.name)}
+                            />
 
-                 )  
-               }) }
+                        )  
+                    }) 
+                    :null
+               } */}
 
+               { cars }
                {/* <Car 
                name={cars[0].name} 
                year={cars[0].year} 
