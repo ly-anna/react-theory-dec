@@ -7,7 +7,8 @@ import Car from './Car/Car'
 class App extends Component {
 
     state = {
-        cars: [
+        cars: 
+        [
             {name: 'Ford', year: 2018},
             {name: 'Audi', year: 2016},
             {name: 'Mazda', year: 2010}
@@ -24,7 +25,8 @@ class App extends Component {
     }
 
     handleInput = (event) => {
-        console.log('Changed', event.target.value)
+        // Нативный объект event, поле target и поле value
+        // console.log('Changed', event.target.value)
         this.setState({
             pageTitle: event.target.value
         })
@@ -36,7 +38,7 @@ class App extends Component {
             textAlign: 'center'
         }
         
-        const cars = this.state.cars;
+        // const cars = this.state.cars;
 
 // используем фигурные скобки, когда передаем какой-то объект. 
 // name и year -  это и есть свойства(props) компонента Car - 
@@ -57,7 +59,19 @@ class App extends Component {
                onClick={this.changeTitleHandler.bind(this, 'Changed!')}
                >Change title</button>
 
-               <Car 
+               { this.state.cars.map((car, index) => {
+                 return (
+                     <Car 
+                        key={index}
+                        name={car.name}
+                        year={car.year}
+                        onChangeTitle={() => this.changeTitleHandler(car.name)}
+                     />
+
+                 )  
+               }) }
+
+               {/* <Car 
                name={cars[0].name} 
                year={cars[0].year} 
                onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}
@@ -71,7 +85,7 @@ class App extends Component {
                name={cars[2].name} 
                year={cars[2].year} 
                onChangeTitle={() => this.changeTitleHandler(cars[2].name)}
-               />
+               /> */}
            </div>
       );
 
