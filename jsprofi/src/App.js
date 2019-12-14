@@ -44,8 +44,11 @@ class App extends Component {
             // и JS поймет, что мы хотим поменять именно ключ cars  со значением cars
         })
     }
-    deleteHandler() {
+    deleteHandler(index) {
+        const cars = this.state.cars.concat() // создает новую копию массива
+        cars.splice(index, 1)
         
+        this.setState({cars})
     }
 
     // handleInput = (event) => {
