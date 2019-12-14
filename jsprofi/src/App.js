@@ -24,12 +24,29 @@ class App extends Component {
         })
 
     }
-    changeTitleHandler = pageTitle => 
-        this.setState({pageTitle})
+    // changeTitleHandler = pageTitle => 
+    //     this.setState({pageTitle})
     
     
-
-    
+    onChangeName(name, index) {
+        const car = this.state.cars[index]
+        car.name = name
+        // const cars = this.state.cars.concat() // получаем склонированный массив
+        // или можно воспользоваться боле современным способом - спред оператором
+        // spread - это многоточие ...
+        const cars = [...this.state.cars] 
+        // получается мы разворачиваем все элементы данного массива внутри нового массива
+        // в cars - мы тут получим новый массив,который будет склонирован
+        cars[index] = car
+        this.setState({
+            cars
+            // cars: cars здесь ключ и значение совпадают, поэтому мы можем просто написать cars
+            // и JS поймет, что мы хотим поменять именно ключ cars  со значением cars
+        })
+    }
+    deleteHandler() {
+        
+    }
 
     // handleInput = (event) => {
     //     // Нативный объект event, поле target и поле value
@@ -47,17 +64,20 @@ class App extends Component {
         let cars = null
 
         if (this.state.showCars) {
-            cars = this.state.cars.map((car, index) => {
+            cars = this.state.cars.map((car,
+                 index) => {
                 return (
                     <Car 
                         key={index}
                         name={car.name}
                         year={car.year}
-                        onChangeTitle={() => this.changeTitleHandler(car.name)}
+                        onDelete={this.deleteHandler.bind(this, index)}
+                        onChangeName={(event) => this.onChangeName(event.target.value, index)}
                     />
                 )
             })
         }
+
         // const cars = this.state.cars;
 
 // используем фигурные скобки, когда передаем какой-то объект. 
