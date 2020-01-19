@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
-import Car from './Car/Car'
+import React from 'react';
+import { Component } from 'react';
+import Car from './Car/Car';
 
-
- 
+/* Это основной компонент, который создан при помощи ключевого слова class
+ и он наследует все свои свойства от React Component, который мы импортируем 
+ из библиотеки React.
+ App компонент рендерится в index.js, где мы с помощью библиотеки ReactDOM.render 
+ и метода render выводим компонент в ДОМ-дерево
+*/
 
 class App extends Component {
 
@@ -89,8 +94,8 @@ class App extends Component {
 
        return (
            <div style={divStyle}>
-               <h1>{this.state.pageTitle}</h1>
-
+               {/* <h1>{this.state.pageTitle}</h1> */}
+                <h1>{this.props.title}</h1>
                {/* <input type='text' onChange={this.handleInput} /> */}
 
 
