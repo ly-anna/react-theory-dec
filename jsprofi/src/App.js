@@ -11,17 +11,23 @@ import Car from './Car/Car';
 
 class App extends Component {
 
-    state = {
-        cars: 
-        [
-            {name: 'Ford', year: 2018},
-            {name: 'Audi', year: 2016},
-            {name: 'Mazda', year: 2010}
-        ],
-        pageTitle: 'React Components',
-        showCars: false
+    constructor(props) {
+        console.log('App constructor')
+        super(props)
 
+        this.state = {
+            cars: 
+            [
+                {name: 'Ford', year: 2018},
+                {name: 'Audi', year: 2016},
+                {name: 'Mazda', year: 2010}
+            ],
+            pageTitle: 'React Components',
+            showCars: false
+        }
     }
+
+    
 
     toggleCarsHandler = () => {
         this.setState({
@@ -64,8 +70,18 @@ class App extends Component {
     //     })
     // }
 
+    /* первый жизненный цикл компонента*/
+    componentWillMount() {
+        console.log('App componentWillMount')
+    }
+
+    /* второй жизненный цикл компонента*/
+    componentDidMount() {
+        console.log('App componentDidMount')
+    }
+    /* render  тоже является жизненный цикл компонента*/
     render() {
-        console.log('Render')
+        console.log('App Render')
         const divStyle = {
             textAlign: 'center'
         }
