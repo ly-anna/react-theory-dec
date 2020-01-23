@@ -108,58 +108,25 @@ class App extends Component {
 // name и year -  это и есть свойства(props) компонента Car - 
 // передаем свойства как значения атрибутов 
 
-       return (
-           <div style={divStyle}>
-               {/* <h1>{this.state.pageTitle}</h1> */}
-                <h1>{this.props.title}</h1>
-               {/* <input type='text' onChange={this.handleInput} /> */}
+return (
+    <div style={divStyle}>
+      {/*<h1>{this.state.pageTitle}</h1>*/}
+      <h1>{this.props.title}</h1>
 
+      <button
+        className={'AppButton'}
+        onClick={this.toggleCarsHandler}
+      >Toggle cars</button>
 
-{/* не укзаываем () у функции  changeTitleHandler(), потому что мы добавляем
-указатель на функцию, которая выполнится в том момент, когда будет происходить 
-событие если указать скобки, то функция выполнится сразу
-*/}
-               <button 
-               onClick={this.toggleCarsHandler}
-               >Toggle cars</button>
-
-{/* вывод списка машин по нажатию кнопки Toggle cars */}
-               {/* {  this.state.showCars 
-                    ? this.state.cars.map((car, index) => {
-                        return (
-                            <Car 
-                                key={index}
-                                name={car.name}
-                                year={car.year}
-                                onChangeTitle={() => this.changeTitleHandler(car.name)}
-                            />
-
-                        )  
-                    }) 
-                    :null
-               } */}
-
-               { cars }
-               {/* <Car 
-               name={cars[0].name} 
-               year={cars[0].year} 
-               onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}
-               />
-               <Car 
-               name={cars[1].name} 
-               year={cars[1].year} 
-               onChangeTitle={() => this.changeTitleHandler(cars[1].name)}
-               />
-               <Car 
-               name={cars[2].name} 
-               year={cars[2].year} 
-               onChangeTitle={() => this.changeTitleHandler(cars[2].name)}
-               /> */}
-           </div>
-      );
-
-
-  
+      <div style={{
+        width: 400,
+        margin: 'auto',
+        paddingTop: '20px'
+      }}>
+        { cars }
+      </div>
+    </div>
+  );
 }
 }
 
